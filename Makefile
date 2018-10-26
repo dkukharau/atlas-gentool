@@ -21,6 +21,7 @@ latest:
 .PHONY: versioned
 versioned:
 	docker build -f Dockerfile --build-arg PGG_VERSION=$(PGGVersion) --build-arg AAT_VERSION=$(AATVersion) -t $(IMAGE_NAME):$(IMAGE_VERSION) .
+	docker tag $(IMAGE_NAME):$(IMAGE_VERSION) $(IMAGE_NAME):latest
 
 .PHONY: clean
 clean:

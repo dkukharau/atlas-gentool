@@ -1,0 +1,23 @@
+sudo: required
+
+services:
+- docker
+
+language: generic
+
+jobs:
+  include:
+    - if: tag IS blank
+      script:
+        - make latest
+        - make test
+      deploy:
+        provider: script
+        script: make push-latest
+    - if: tag IS present
+      script:
+        - make versioned
+        - make test
+      deploy:
+        provider: script
+        script: make push-versioned
