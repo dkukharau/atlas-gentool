@@ -7,17 +7,15 @@ language: generic
 
 jobs:
   include:
-    - if: tag IS blank
+    - if:  tag IS blank OR commit_message =~ /^Triggered by upstream build/
       script:
-        - make latest
-        - make test
+        - make latest && make test
       deploy:
         provider: script
         script: make push-latest
-    - if: tag IS present
+    - if: tag IS present AND commit_message !~ /^Triggered by upstream build/
       script:
-        - make versioned
-        - make test
+        - make versioned && make test
       deploy:
         provider: script
         script: make push-versioned
