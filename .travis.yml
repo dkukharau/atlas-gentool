@@ -19,6 +19,7 @@ jobs:
       script:
         - make versioned && make test
       deploy:
+        on:
           tags: true
         provider: script
         script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-versioned
