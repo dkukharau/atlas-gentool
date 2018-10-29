@@ -60,11 +60,11 @@ test-clean:
 .PHONY: push-latest push-versioned
 
 push-latest:
-    docker push $(IMAGE_NAME):latest
+	docker push $(IMAGE_NAME):latest
 
 push-versioned:
-    docker push $(IMAGE_NAME):$(IMAGE_VERSION)
-    docker push $(IMAGE_NAME):latest
+	docker push $(IMAGE_NAME):$(IMAGE_VERSION)
+	docker push $(IMAGE_NAME):latest
 
 .PHONY: version
 version:
