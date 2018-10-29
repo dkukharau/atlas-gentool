@@ -12,6 +12,8 @@ jobs:
       script:
         - make latest && make test
       deploy:
+        on:
+          branch: master
         provider: script
         script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-latest
     # For release purpose
@@ -19,5 +21,8 @@ jobs:
       script:
         - make versioned && make test
       deploy:
+        on:
+          branch: master
+          tags: true
         provider: script
         script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-versioned
