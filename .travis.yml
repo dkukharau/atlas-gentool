@@ -12,14 +12,10 @@ jobs:
         - make latest && make test
       deploy:
         provider: script
-        script:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          - make push-latest
+        script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-latest
     - if: tag IS present AND commit_message !~ /^Triggered by upstream build/
       script:
         - make versioned && make test
       deploy:
         provider: script
-        script:
-          - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          - make push-versioned
+        script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-versioned
